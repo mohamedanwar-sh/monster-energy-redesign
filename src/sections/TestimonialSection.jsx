@@ -292,7 +292,7 @@ const TestimonialSection = () => {
                 playsInline
                 muted
                 loop
-                preload="none"
+                preload="metadata"
                 poster={card.poster}
                 className="size-full object-cover"
               >
@@ -418,7 +418,7 @@ const TestimonialSection = () => {
                   className="absolute top-0 left-0 w-full h-full object-contain"
                   controls
                   autoPlay
-                  preload="none"
+                  preload="metadata"
                   poster={cards.find(c => c.name === selectedVideo.name)?.poster}
                 >
                   <source src={cards.find(c => c.name === selectedVideo.name)?.webm} type="video/webm" />
