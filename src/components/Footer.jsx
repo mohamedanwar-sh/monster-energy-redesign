@@ -41,7 +41,7 @@ const Footer = () => {
         {/* Logo + Social */}
         <div className="flex flex-col items-start gap-8">
           <img 
-            src="/images/monster-logo.png" 
+            src="/images/monster-energy-logo.webp" 
             alt="Monster Energy" 
             loading="lazy"
             decoding="async"

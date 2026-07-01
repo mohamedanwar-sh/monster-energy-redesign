@@ -3,17 +3,8 @@
    1. Barlow Condensed — nav links, headings, UI labels (Monster website font)
    2. Barlow            — body / paragraph text
    3. Bebas Neue        — hero display / wordmark titles
-   4. ProximaNova       — legacy paragraph (kept as fallback)
 ───────────────────────────────────────────────────────────── */
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&display=swap");
 @import "tailwindcss";
-
-@font-face {
-  font-family: "ProximaNova";
-  src: url("/fonts/ProximaNova-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
-}
 
 /* ─────────────────────────────────────────────────────────────
    THEME
@@ -66,7 +57,6 @@
   --font-sans:        "Barlow Condensed", sans-serif;
   --font-body:        "Barlow", sans-serif;
   --font-display:     "Bebas Neue", sans-serif;
-  --font-paragraph:   "ProximaNova", sans-serif;
 }
 
 /* ─────────────────────────────────────────────────────────────

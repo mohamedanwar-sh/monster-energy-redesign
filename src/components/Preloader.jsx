@@ -183,8 +183,9 @@ const Preloader = ({ isReady, onExitStart, onComplete }) => {
           <div className="preloader__scan" aria-hidden="true" />
           <div className="preloader__logo-mask" aria-hidden="true">
             <img
-              src="/images/m.png"
+              src="/images/monster-claw-mark.webp"
               alt=""
+              decoding="async"
               className="preloader__logo"
               draggable="false"
             />

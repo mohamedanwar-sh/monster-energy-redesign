@@ -1,10 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "../utils/motion";
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 
   useGSAP(
     () => {
@@ -42,6 +44,38 @@ const HeroSection = () => {
     { scope: sectionRef },
   );
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !("IntersectionObserver" in window)) {
+      setShouldLoadVideo(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        setShouldLoadVideo(true);
+        observer.disconnect();
+      },
+      { rootMargin: "0px" },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+    video.play().catch(() => {});
+  }, [shouldLoadVideo]);
+
   return (
     <section id="top" ref={sectionRef} className="bg-main-bg" data-testid="hero-section">
       <div className="hero-container">
@@ -57,15 +91,23 @@ const HeroSection = () => {
           />
 
           <video
-            src="/videos/zaza.mp4"
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
-            preload="auto"
+            preload="none"
+            poster="/videos/posters/zaza-poster.webp"
             className="hero-video absolute inset-0 w-full h-full object-cover"
             aria-label="Monster Energy hero video"
-          />
+          >
+            {shouldLoadVideo && (
+              <>
+                <source src="/videos/zaza.webm" type="video/webm" />
+                <source src="/videos/zaza.mp4" type="video/mp4" />
+              </>
+            )}
+          </video>
 
           {/* vignette — darkens edges only, centre stays bright */}
           <div

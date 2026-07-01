@@ -209,7 +209,7 @@ const BenefitSection = () => {
     <section id="benefits" ref={sectionRef} className="benefit-section">
       <div className="benefit-story-glow" aria-hidden="true" />
         <img
-          src="/images/m.png"
+          src="/images/monster-claw-mark.webp"
           alt=""
           loading="lazy"
           decoding="async"
@@ -236,7 +236,7 @@ const BenefitSection = () => {
             draggable="false"
           />
           <img
-            src="/images/m.png"
+            src="/images/monster-claw-mark.webp"
             alt=""
             loading="lazy"
             decoding="async"

@@ -86,7 +86,13 @@ const NavBar = () => {
 
         {/* Desktop logo */}
         <a href="/" className="shrink-0">
-          <img src="/images/monster-logo.png" alt="Monster Energy" className="h-10 w-auto" />
+          <img
+            src="/images/monster-energy-logo.webp"
+            alt="Monster Energy"
+            fetchPriority="high"
+            decoding="async"
+            className="h-10 w-auto"
+          />
         </a>
 
         {/* Nav links */}
@@ -169,7 +175,13 @@ const NavBar = () => {
 
         {/* Mobile logo */}
         <a href="/" className="absolute left-1/2 -translate-x-1/2">
-          <img src="/images/m.png" alt="Monster Energy" className="h-10 w-auto" />
+          <img
+            src="/images/monster-claw-mark.webp"
+            alt="Monster Energy"
+            fetchPriority="high"
+            decoding="async"
+            className="h-10 w-auto"
+          />
         </a>
 
         {/* Icons */}

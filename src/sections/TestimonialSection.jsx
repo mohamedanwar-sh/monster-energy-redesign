@@ -5,14 +5,24 @@ import gsap from "gsap";
 import { useMediaQuery } from "react-responsive";
 import { motion } from "../utils/motion";
 
+const playPreviewVideo = (video) => {
+  video.play().catch((error) => {
+    if (error.name !== "AbortError") {
+      console.warn("Play error:", error);
+    }
+  });
+};
+
 const TestimonialSection = () => {
   const sectionRef = useRef(null);
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const triggerButtonRef = useRef(null);
   const vdRef = useRef([]);
+  const pendingPlayIndexRef = useRef(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [shouldLoadPreviewVideos, setShouldLoadPreviewVideos] = useState(false);
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
   const modalTitleId = "testimonial-modal-title";
   const modalDescriptionId = "testimonial-modal-description";
@@ -108,12 +118,61 @@ const TestimonialSection = () => {
     { dependencies: [isDesktop], scope: sectionRef, revertOnUpdate: true }
   );
 
+  useEffect(() => {
+    if (shouldLoadPreviewVideos) return undefined;
+
+    const section = sectionRef.current;
+    if (!section || !("IntersectionObserver" in window)) {
+      setShouldLoadPreviewVideos(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        setShouldLoadPreviewVideos(true);
+        observer.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [shouldLoadPreviewVideos]);
+
   const handlePlay = (index) => {
+    if (!shouldLoadPreviewVideos) {
+      pendingPlayIndexRef.current = index;
+      setShouldLoadPreviewVideos(true);
+      return;
+    }
+
     const video = vdRef.current[index];
+    if (video && !video.currentSrc) {
+      video.load();
+    }
+
     if (video && video.paused) {
-      video.play().catch((error) => console.warn("Play error:", error));
+      playPreviewVideo(video);
     }
   };
+
+  useEffect(() => {
+    if (!shouldLoadPreviewVideos || pendingPlayIndexRef.current === null) return;
+
+    const index = pendingPlayIndexRef.current;
+    pendingPlayIndexRef.current = null;
+
+    window.requestAnimationFrame(() => {
+      const video = vdRef.current[index];
+      if (!video) return;
+
+      video.load();
+      playPreviewVideo(video);
+    });
+  }, [shouldLoadPreviewVideos]);
 
   const handlePause = (index) => {
     const video = vdRef.current[index];
@@ -230,12 +289,20 @@ const TestimonialSection = () => {
             >
               <video
                 ref={(el) => (vdRef.current[index] = el)}
-                src={card.src}
                 playsInline
                 muted
                 loop
+                preload="none"
+                poster={card.poster}
                 className="size-full object-cover"
-              />
+              >
+                {shouldLoadPreviewVideos && (
+                  <>
+                    <source src={card.webm} type="video/webm" />
+                    <source src={card.mp4} type="video/mp4" />
+                  </>
+                )}
+              </video>
               
               {/* Profile Image + Name - Bottom Left */}
               {card.img && (
@@ -248,6 +315,8 @@ const TestimonialSection = () => {
                     <img 
                       src={card.img} 
                       alt={card.name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -318,6 +387,8 @@ const TestimonialSection = () => {
                   <img 
                     src={cards.find(c => c.name === selectedVideo.name)?.img} 
                     alt={selectedVideo.name.trim()}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -337,6 +408,7 @@ const TestimonialSection = () => {
                   className="absolute top-0 left-0 w-full h-full"
                   src={getYouTubeEmbedUrl(selectedVideo.link)}
                   title="YouTube video player"
+                  loading="lazy"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -346,8 +418,12 @@ const TestimonialSection = () => {
                   className="absolute top-0 left-0 w-full h-full object-contain"
                   controls
                   autoPlay
-                  src={selectedVideo.link}
-                />
+                  preload="none"
+                  poster={cards.find(c => c.name === selectedVideo.name)?.poster}
+                >
+                  <source src={cards.find(c => c.name === selectedVideo.name)?.webm} type="video/webm" />
+                  <source src={cards.find(c => c.name === selectedVideo.name)?.mp4} type="video/mp4" />
+                </video>
               )}
             </div>
           </div>

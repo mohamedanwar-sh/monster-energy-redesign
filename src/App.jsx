@@ -1,18 +1,13 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from "react";
 
 import NavBar from "./components/NavBar";
 import Preloader from "./components/Preloader";
 
 import HeroSection from "./sections/HeroSection";
-import MessageSection from "./sections/MessageSection";
-import FlavorSection from "./sections/FlavorSection";
-import ChooseEnergySection from "./sections/ChooseEnergySection";
-import EnergyProfileSection from "./sections/EnergyProfileSection";
-import BenefitSection from "./sections/BenefitSection";
-import TestimonialSection from "./sections/TestimonialSection";
-import Footer from "./components/Footer";
+
+const DeferredSections = lazy(() => import("./sections/DeferredSections"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,8 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
 // Critical Assets
 // ============================
 const criticalAssets = [
-  { type: "image", src: "/images/monster-logo.png" },
-  { type: "image", src: "/images/m.png" },
+  { type: "image", src: "/images/monster-energy-logo.webp" },
+  { type: "image", src: "/images/monster-claw-mark.webp" },
   { type: "image", src: "/images/texture.webp" },
 ];
 
@@ -185,19 +180,9 @@ const App = () => {
 
         <HeroSection />
 
-        <MessageSection />
-
-        <FlavorSection />
-
-        <ChooseEnergySection />
-
-        <EnergyProfileSection />
-
-        <BenefitSection />
-
-        <TestimonialSection />
-
-        <Footer />
+        <Suspense fallback={null}>
+          <DeferredSections />
+        </Suspense>
       </main>
 
       {showPreloader && (
