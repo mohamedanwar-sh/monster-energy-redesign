@@ -1,0 +1,981 @@
+/* ─────────────────────────────────────────────────────────────
+   FONTS
+   1. Barlow Condensed — nav links, headings, UI labels (Monster website font)
+   2. Barlow            — body / paragraph text
+   3. Bebas Neue        — hero display / wordmark titles
+   4. ProximaNova       — legacy paragraph (kept as fallback)
+───────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/fonts/ProximaNova-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   THEME
+───────────────────────────────────────────────────────────── */
+@theme {
+  /* ── Monster Energy Brand Core ────────────────────────────── */
+  --color-black:                #000000;
+  --color-main-bg:              #0d0d0d;
+  --color-white:                #ffffff;
+
+  /* ── Original / Classic Line ─────────────────────────────── */
+  --color-monster-green:        #7CB701;
+  --color-monster-green-alt:    #88BE00;
+  --color-monster-gray:         #9B999B;
+
+  /* ── Ultra Series (zero-sugar, matte cans) ───────────────── */
+  --color-ultra-white:          #e8e8e8;
+  --color-ultra-blue:           #5bb8e8;
+  --color-ultra-red:            #c0272d;
+  --color-ultra-violet:         #6a3fa0;
+  --color-ultra-paradise:       #4cba5e;
+  --color-ultra-rosa:           #e8507a;
+  --color-ultra-watermelon:     #e83232;
+  --color-ultra-fiesta:         #2456b4;
+  --color-ultra-ruby-red:       #c4285a;
+  --color-ultra-black:          #1a1a1a;
+
+  /* ── Juice / Juiced Line ─────────────────────────────────── */
+  --color-juice-mango:          #e87820;
+  --color-juice-pipeline:       #e87898;
+  --color-juice-pipeline-gold:  #d4a830;
+  --color-juice-pacific:        #78b4e8;
+  --color-juice-khaotic:        #e8d428;
+  --color-juice-monarch:        #f0a0b4;
+  --color-juice-rio:            #3aaa50;
+  --color-juice-bad-apple:      #c03030;
+  --color-juice-voodoo:         #7832a0;
+
+  /* ── Java Monster (coffee line) ──────────────────────────── */
+  --color-java-bg:              #1e1410;
+  --color-java-accent:          #c8a050;
+
+  /* ── Reserve Line ────────────────────────────────────────── */
+  --color-reserve-bg:           #111111;
+  --color-reserve-pineapple:    #e8d428;
+  --color-reserve-orange:       #e87820;
+  --color-reserve-watermelon:   #e83232;
+
+  /* ── Typography ──────────────────────────────────────────── */
+  --font-sans:        "Barlow Condensed", sans-serif;
+  --font-body:        "Barlow", sans-serif;
+  --font-display:     "Bebas Neue", sans-serif;
+  --font-paragraph:   "ProximaNova", sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE STYLES
+───────────────────────────────────────────────────────────── */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--color-main-bg);
+  color: var(--color-white);
+  font-family: "Barlow Condensed", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITY LAYER
+───────────────────────────────────────────────────────────── */
+@layer utilities {
+  .flex-center  { @apply flex justify-center items-center; }
+  .col-center   { @apply flex flex-col justify-center items-center; }
+  .abs-center   { @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2; }
+
+  .font-condensed { font-family: "Barlow Condensed", sans-serif; }
+  .font-body      { font-family: "Barlow", sans-serif; }
+  .font-display   { font-family: "Bebas Neue", sans-serif; }
+
+  .general-title {
+    @apply 2xl:text-[8.5rem] md:text-8xl text-5xl font-bold uppercase leading-[9vw] tracking-[-.35vw];
+    font-family: "Barlow Condensed", sans-serif;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   COMPONENT LAYER
+───────────────────────────────────────────────────────────── */
+@layer components {
+  .paragraph-line {
+    @apply text-nowrap overflow-hidden;
+  }
+
+  /* ── Hero Section ─────────────────────────────────────────── */
+  .hero-container {
+    @apply relative bg-black w-screen h-dvh overflow-hidden;
+  }
+
+  /* ── Message Section ──────────────────────────────────────── */
+  .message-content {
+    @apply min-h-dvh overflow-hidden flex justify-center items-center relative z-20;
+    background-color: var(--color-black);
+    color: var(--color-white);
+
+    .msg-wrapper {
+      @apply 2xl:text-[8.5rem] md:text-8xl text-5xl font-bold uppercase leading-[9vw]
+             tracking-[-.35vw] flex flex-col justify-center items-center md:gap-24 gap-14;
+      font-family: "Bebas Neue", sans-serif;
+
+      h1:first-of-type { @apply 2xl:max-w-4xl md:max-w-2xl max-w-xs text-center; }
+      h1:last-of-type  { @apply 2xl:max-w-7xl md:max-w-4xl max-w-xs text-center; }
+    }
+
+    p {
+      @apply text-center;
+      font-family: "Barlow", sans-serif;
+    }
+
+    h1, h2 { @apply leading-none; }
+
+    .msg-text-scroll {
+      @apply rotate-[3deg] 2xl:translate-y-5 -translate-y-5 absolute z-10;
+      border: 0.5vw solid var(--color-black);
+    }
+  }
+
+  /* ── Flavor Section ───────────────────────────────────────── */
+  .flavor-section {
+    @apply min-h-dvh;
+    background-color: var(--color-black);
+
+    .flavor-text-scroll {
+      @apply rotate-[-3deg] md:translate-y-5 absolute z-10;
+      border: 0.5vw solid var(--color-black);
+    }
+
+    .first-text-split h1  { @apply md:text-center text-white; }
+    .second-text-split h1 {
+      @apply md:text-center;
+      color: var(--color-monster-green);
+    }
+
+    .slider-wrapper {
+      @apply xl:h-dvh min-h-dvh md:min-h-fit w-full mt-0 md:mt-20 xl:mt-0;
+
+      .flavors {
+        @apply h-full w-full flex flex-col xl:flex-row items-center
+               2xl:gap-72 xl:gap-52 md:gap-14 gap-7 xl:flex-nowrap;
+
+        .drinks  { @apply absolute left-1/2 -translate-x-1/2 bottom-0 h-72 md:h-80 xl:h-full max-w-[82%] xl:max-w-none object-contain; }
+        .elements{ @apply absolute bottom-10 xl:top-0 xl:bottom-auto w-full max-w-full object-contain; }
+
+        h1 {
+          @apply absolute md:bottom-10 md:left-10 bottom-5 left-5
+                 md:text-6xl text-3xl font-semibold uppercase tracking-tighter;
+          font-family: "Barlow Condensed", sans-serif;
+          color: var(--color-monster-green);
+        }
+      }
+    }
+  }
+
+  /* ── Nutrition Section ────────────────────────────────────── */
+  .choose-energy-section {
+    --energy-glow: var(--color-monster-green);
+    @apply relative min-h-dvh overflow-hidden bg-black px-5 py-20 md:px-10 xl:px-14;
+    isolation: isolate;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -18% -10%;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--energy-glow) 28%, transparent), transparent 34%),
+        radial-gradient(circle at 16% 70%, rgba(255, 255, 255, 0.06), transparent 28%),
+        linear-gradient(180deg, #000 0%, #050505 48%, #000 100%);
+      opacity: 0.9;
+      transition: background 0.45s ease;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at center, black, transparent 74%);
+      opacity: 0.5;
+    }
+
+    .choose-energy-inner {
+      @apply mx-auto grid min-h-[calc(100dvh-10rem)] w-full max-w-7xl items-center gap-8 xl:grid-cols-[0.9fr_1.1fr_0.9fr];
+    }
+
+    .choose-energy-copy {
+      @apply relative z-10 text-center xl:text-left;
+
+      h2 {
+        @apply mt-4 text-5xl font-black uppercase leading-none text-white md:text-7xl xl:text-8xl;
+        font-family: "Barlow Condensed", sans-serif;
+
+        span {
+          @apply block;
+          color: var(--energy-glow);
+        }
+      }
+    }
+
+    .choose-energy-kicker,
+    .choose-energy-label,
+    .choose-energy-best span {
+      @apply m-0 text-sm font-black uppercase tracking-[0.22em];
+      color: var(--energy-glow);
+    }
+
+    .choose-energy-stage {
+      @apply relative mx-auto grid h-[22rem] w-full max-w-[24rem] place-items-center md:h-[32rem] md:max-w-[34rem] xl:h-[42rem];
+      transform: translateZ(0);
+    }
+
+    .choose-energy-glow {
+      @apply absolute left-1/2 top-1/2 h-[72%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full;
+      background:
+        radial-gradient(circle, color-mix(in srgb, var(--energy-glow) 48%, transparent), transparent 64%);
+      filter: blur(34px);
+      opacity: 0.82;
+    }
+
+    .choose-energy-can {
+      @apply absolute h-[92%] max-h-full w-auto object-contain opacity-0;
+      filter:
+        drop-shadow(0 2rem 3rem rgba(0, 0, 0, 0.58))
+        drop-shadow(0 0 2rem color-mix(in srgb, var(--energy-glow) 38%, transparent));
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+
+    .choose-energy-panel {
+      @apply relative z-10 flex flex-col gap-7;
+    }
+
+    .choose-energy-details {
+      @apply min-h-[17rem] border-l-2 pl-5 md:min-h-[14rem];
+      border-color: var(--energy-glow);
+    }
+
+    .choose-energy-details h3 {
+      @apply mt-3 text-5xl font-black uppercase leading-none md:text-7xl;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    .choose-energy-notes {
+      @apply mt-5 flex flex-wrap gap-2;
+
+      span {
+        @apply border px-3 py-2 text-sm font-bold uppercase tracking-[0.08em] text-white;
+        border-color: color-mix(in srgb, var(--energy-glow) 52%, rgba(255, 255, 255, 0.22));
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .choose-energy-best {
+      @apply mt-6;
+
+      p {
+        @apply mt-2 max-w-md text-base leading-[1.35] text-white/70 md:text-lg;
+        font-family: "Barlow", sans-serif;
+      }
+    }
+
+    .choose-energy-selector {
+      @apply grid grid-cols-1 gap-3 sm:grid-cols-3 xl:grid-cols-1;
+    }
+
+    .choose-energy-option {
+      @apply flex min-h-14 items-center gap-3 border border-white/15 bg-white/5 px-4 py-3 text-left text-sm font-black uppercase tracking-[0.12em] text-white transition-colors duration-200;
+      font-family: "Barlow Condensed", sans-serif;
+
+      &:hover,
+      &[aria-pressed="true"] {
+        border-color: var(--option-accent);
+        background: color-mix(in srgb, var(--option-accent) 14%, rgba(255, 255, 255, 0.05));
+      }
+    }
+
+    .choose-energy-swatch {
+      @apply h-3 w-3 flex-none;
+      background: var(--option-accent);
+      box-shadow: 0 0 18px var(--option-accent);
+    }
+  }
+
+  .energy-profile-section {
+    @apply relative overflow-hidden bg-black px-5 py-20 md:px-10 xl:px-14;
+    isolation: isolate;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(124, 183, 1, 0.18), transparent 32%),
+        radial-gradient(circle at 82% 72%, rgba(232, 120, 32, 0.14), transparent 34%),
+        linear-gradient(180deg, #000 0%, #070707 52%, #000 100%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, transparent, rgba(124, 183, 1, 0.12), transparent),
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 64px;
+      opacity: 0.38;
+      pointer-events: none;
+    }
+
+    .energy-profile-inner {
+      @apply mx-auto grid w-full max-w-7xl gap-10 xl:grid-cols-[0.72fr_1.28fr] xl:items-start;
+    }
+
+    .energy-profile-heading {
+      @apply xl:sticky xl:top-28;
+
+      p {
+        @apply m-0 text-sm font-black uppercase tracking-[0.22em];
+        color: var(--color-monster-green);
+      }
+
+      h2 {
+        @apply mt-4 max-w-2xl text-5xl font-black uppercase leading-none text-white md:text-7xl xl:text-8xl;
+        font-family: "Barlow Condensed", sans-serif;
+      }
+    }
+
+    .energy-profile-grid {
+      @apply grid gap-4;
+    }
+
+    .energy-profile-row {
+      @apply border border-white/12 bg-white/[0.035] p-5 md:p-6;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 1.5rem 4rem rgba(0, 0, 0, 0.28);
+      transform: translateZ(0);
+    }
+
+    .energy-profile-meta {
+      @apply flex items-start justify-between gap-5;
+
+      h3 {
+        @apply m-0 text-2xl font-black uppercase leading-none text-white md:text-4xl;
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      p {
+        @apply mt-2 max-w-xl text-sm leading-[1.35] text-white/58 md:text-base;
+        font-family: "Barlow", sans-serif;
+      }
+    }
+
+    .energy-profile-value {
+      @apply min-w-16 text-right text-3xl font-black leading-none md:text-5xl;
+      color: var(--profile-accent);
+      text-shadow: 0 0 22px color-mix(in srgb, var(--profile-accent) 58%, transparent);
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    .energy-profile-track {
+      @apply relative mt-5 h-3 overflow-hidden bg-white/10 md:h-4;
+      box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.75);
+    }
+
+    .energy-profile-fill {
+      @apply absolute inset-y-0 left-0 block w-full;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--profile-accent) 45%, #111), var(--profile-accent), rgba(255, 255, 255, 0.78));
+      box-shadow:
+        0 0 20px color-mix(in srgb, var(--profile-accent) 72%, transparent),
+        0 0 42px color-mix(in srgb, var(--profile-accent) 36%, transparent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      will-change: transform;
+    }
+  }
+
+  /* ── Benefit Section ──────────────────────────────────────── */
+  .benefit-section {
+    @apply relative min-h-dvh overflow-hidden bg-black px-5 py-16 md:px-10 md:py-20 xl:px-14;
+    background-color: var(--color-black);
+    isolation: isolate;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(180deg, rgba(124, 183, 1, 0.12) 0%, transparent 18%),
+        radial-gradient(circle at 22% 48%, rgba(124, 183, 1, 0.2), transparent 34%),
+        radial-gradient(circle at 78% 58%, rgba(136, 190, 0, 0.12), transparent 32%),
+        linear-gradient(180deg, #000 0%, #040604 48%, #000 100%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 183, 1, 0.035) 1px, transparent 1px);
+      background-size: 76px 76px;
+      mask-image: radial-gradient(circle at center, black, transparent 72%);
+      opacity: 0.65;
+    }
+
+    .benefit-story-glow {
+      @apply absolute left-[42%] top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full md:h-[42rem] md:w-[42rem] xl:left-[38%];
+      z-index: -1;
+      background:
+        radial-gradient(circle, rgba(124, 183, 1, 0.38), rgba(124, 183, 1, 0.11) 42%, transparent 70%);
+      filter: blur(42px);
+      opacity: 0.64;
+      will-change: transform, opacity;
+    }
+
+    .benefit-story-claw {
+      @apply pointer-events-none absolute right-[-5rem] top-1/2 hidden w-[34vw] max-w-[34rem] -translate-y-1/2 opacity-[0.1] xl:block;
+      filter: drop-shadow(0 0 2.5rem rgba(124, 183, 1, 0.52));
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .benefit-story-inner {
+      @apply relative mx-auto grid min-h-[calc(100dvh-8rem)] w-full max-w-7xl items-center gap-8 md:min-h-[calc(100dvh-10rem)] xl:grid-cols-[0.88fr_1fr];
+    }
+
+    .benefit-meta {
+      @apply absolute left-0 right-0 top-0 z-20 flex justify-between gap-4 text-xs font-black uppercase tracking-[0.22em] text-white/45;
+
+      span:first-child {
+        color: var(--color-monster-green);
+      }
+    }
+
+    .benefit-product-stage {
+      @apply relative mx-auto grid aspect-square w-full max-w-[21rem] place-items-center md:max-w-[29rem] xl:max-w-[34rem];
+      overflow: hidden;
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+
+    .benefit-product-stage::before {
+      content: "";
+      position: absolute;
+      inset: 17% 7% 6%;
+      border-radius: 999px;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 66%);
+      filter: blur(18px);
+      transform: translateY(28%);
+    }
+
+    .benefit-orbit {
+      @apply absolute rounded-full border;
+      border-color: rgba(124, 183, 1, 0.34);
+      box-shadow:
+        inset 0 0 3rem rgba(124, 183, 1, 0.08),
+        0 0 3rem rgba(124, 183, 1, 0.16);
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+
+    .benefit-orbit--outer {
+      @apply h-[86%] w-[86%];
+    }
+
+    .benefit-orbit--inner {
+      @apply h-[58%] w-[58%];
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .benefit-can {
+      @apply absolute z-10 h-[86%] max-h-full w-auto object-contain;
+      filter:
+        drop-shadow(0 2rem 2.4rem rgba(0, 0, 0, 0.62))
+        drop-shadow(0 0 2.6rem rgba(124, 183, 1, 0.34));
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .benefit-stage-claw {
+      @apply pointer-events-none absolute right-[9%] top-[17%] z-20 w-[24%] opacity-80;
+      filter: drop-shadow(0 0 1.6rem rgba(124, 183, 1, 0.58));
+      transform: rotate(10deg);
+    }
+
+    .benefit-copy-panel {
+      @apply relative min-h-[26rem] overflow-hidden border-y border-white/12 py-10 md:min-h-[31rem] md:py-14 xl:min-h-[34rem] xl:py-16;
+    }
+
+    .benefit-copy-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(124, 183, 1, 0.12), transparent 24%, transparent),
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 5rem;
+      mask-image: linear-gradient(90deg, black, transparent 92%);
+      opacity: 0.48;
+      pointer-events: none;
+    }
+
+    .benefit-progress {
+      @apply absolute bottom-0 left-0 right-0 h-px overflow-hidden bg-white/12;
+    }
+
+    .benefit-progress-fill {
+      @apply block h-full w-full;
+      background: linear-gradient(90deg, var(--color-monster-green), rgba(255, 255, 255, 0.82));
+      box-shadow: 0 0 24px rgba(124, 183, 1, 0.64);
+      transform: scaleX(0.25);
+      transform-origin: left center;
+      will-change: transform;
+    }
+
+    .benefit-chapters {
+      @apply relative z-10 grid min-h-[20rem] items-center md:min-h-[24rem] xl:min-h-[26rem];
+    }
+
+    .benefit-chapter {
+      @apply absolute inset-0 flex flex-col justify-center;
+      transform: translateZ(0);
+      will-change: transform, opacity;
+
+      p {
+        @apply mb-4 text-sm font-black uppercase tracking-[0.24em] md:mb-5;
+        color: var(--color-monster-green);
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      h2 {
+        @apply max-w-4xl text-6xl font-black uppercase leading-[0.88] text-white md:text-8xl xl:text-[8.8rem];
+        font-family: "Barlow Condensed", sans-serif;
+        text-shadow:
+          0 0 3rem rgba(124, 183, 1, 0.26),
+          0 0 0.4rem rgba(255, 255, 255, 0.08);
+      }
+
+      span {
+        @apply mt-6 block max-w-2xl text-base leading-[1.45] text-white/68 md:text-2xl;
+        font-family: "Barlow", sans-serif;
+      }
+    }
+
+    .benefit-steps {
+      @apply absolute bottom-8 left-0 z-10 flex gap-3 md:bottom-10;
+    }
+
+    .benefit-step {
+      @apply grid size-9 place-items-center border border-white/12 text-xs font-black md:size-10 md:text-sm;
+      background: rgba(0, 0, 0, 0.44);
+      color: var(--color-monster-green);
+      font-family: "Barlow Condensed", sans-serif;
+      box-shadow: inset 0 0 1.2rem rgba(124, 183, 1, 0.06);
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+
+    @media (max-width: 767px) {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+
+      .benefit-story-inner {
+        align-content: center;
+        grid-template-rows: auto auto;
+        min-height: calc(100dvh - 8rem);
+        gap: 1.25rem;
+      }
+
+      .benefit-meta {
+        top: -0.25rem;
+      }
+
+      .benefit-product-stage {
+        margin-top: 1.75rem;
+        width: min(72vw, 17rem);
+        height: min(31vh, 15rem);
+        max-width: none;
+        aspect-ratio: auto;
+      }
+
+      .benefit-can {
+        height: 92%;
+        max-height: 100%;
+      }
+
+      .benefit-stage-claw {
+        width: 22%;
+      }
+
+      .benefit-copy-panel {
+        min-height: min(42vh, 20rem);
+        padding-top: 1.7rem;
+        padding-bottom: 3.8rem;
+      }
+
+      .benefit-chapter h2 {
+        font-size: clamp(2.85rem, 14.5vw, 4.15rem);
+      }
+
+      .benefit-chapter span {
+        margin-top: 1rem;
+        font-size: 0.98rem;
+      }
+
+      .benefit-steps {
+        bottom: 1rem;
+      }
+    }
+  }
+
+  /* ── Testimonials Section ─────────────────────────────────── */
+  .testimonials-section {
+    @apply relative w-full min-h-dvh overflow-hidden py-16 md:py-24;
+    background-color: var(--color-main-bg);
+
+    .pin-box {
+      @apply relative flex flex-col md:flex-row md:flex-wrap items-center justify-center w-full gap-8 px-4 md:px-10 pt-10;
+
+      .vd-card {
+        @apply relative flex-none appearance-none bg-transparent p-0 text-left md:rounded-[2vw] rounded-3xl overflow-hidden;
+        width: min(19rem, calc(100vw - 3.5rem));
+        aspect-ratio: 9 / 16;
+        border: 0.5vw solid #1a1a1a;
+      }
+
+      .vd-card:focus-visible {
+        outline: 2px solid var(--color-monster-green);
+        outline-offset: 6px;
+      }
+    }
+
+    h1 {
+      @apply uppercase text-[20.5vw] leading-[105%] tracking-[-.4vw] ml-[2vw] font-bold;
+      font-family: "Bebas Neue", sans-serif;
+      color: var(--color-monster-green);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-section .pin-box .vd-card {
+      width: min(24rem, calc(50vw - 3rem));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .testimonials-section {
+      @apply h-[120dvh] py-0;
+    }
+
+    .testimonials-section .pin-box {
+      @apply flex-nowrap gap-0 px-0 pt-0 ps-52 absolute 2xl:bottom-32 bottom-[50vh];
+    }
+
+    .testimonials-section .pin-box .vd-card {
+      @apply -ms-44 2xl:relative absolute;
+      width: 24rem;
+    }
+  }
+
+  /* ── Footer Section ───────────────────────────────────────── */
+  .footer-section {
+    @apply 2xl:min-h-dvh overflow-hidden relative;
+    background-color: var(--color-black);
+
+    .social-btn {
+      @apply md:size-[5vw] size-14 md:p-0 p-3 flex justify-center items-center
+             rounded-full transition-colors cursor-pointer;
+      border: 1px solid rgba(124, 183, 1, 0.25);
+
+      &:hover {
+        background-color: rgba(124, 183, 1, 0.12);
+        border-color: var(--color-monster-green);
+      }
+    }
+
+    input {
+      @apply 2xl:text-4xl text-3xl placeholder:font-bold placeholder:tracking-tighter;
+      font-family: "Barlow Condensed", sans-serif;
+      color: var(--color-white);
+    }
+
+    .copyright-box {
+      @apply 2xl:absolute w-full md:px-10 px-5 py-7 bottom-0 md:text-lg
+             flex gap-7 md:flex-row flex-col-reverse md:justify-between justify-center items-center;
+      font-family: "Barlow", sans-serif;
+      color: rgba(155, 153, 155, 0.5);
+
+      p { @apply text-center; }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Preloader
+───────────────────────────────────────────────────────────── */
+.preloader {
+  --preloader-green: #6eff00;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(110, 255, 0, 0.13), transparent 32%),
+    linear-gradient(135deg, #000 0%, #020602 48%, #000 100%);
+  color: #fff;
+  contain: layout paint style;
+  isolation: isolate;
+}
+
+html.preloader-active,
+html.preloader-active body {
+  overflow: hidden;
+}
+
+.preloader__texture {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  background:
+    linear-gradient(rgba(110, 255, 0, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 255, 0, 0.035) 1px, transparent 1px),
+    url("/images/texture.webp");
+  background-size: 72px 72px, 72px 72px, cover;
+  background-position: center;
+  opacity: 0.2;
+  mix-blend-mode: screen;
+  transform: translateZ(0);
+}
+
+.preloader__texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.82)),
+    radial-gradient(ellipse at center, transparent 36%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.preloader__glow {
+  position: absolute;
+  inset: 16% 12%;
+  z-index: -3;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(110, 255, 0, 0.12) 48%, transparent 100%),
+    radial-gradient(ellipse at center, rgba(110, 255, 0, 0.2), transparent 64%);
+  filter: blur(28px);
+  opacity: 0.42;
+  transform: translateZ(0);
+}
+
+.preloader__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.48), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.56)),
+    radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.78) 100%);
+  pointer-events: none;
+}
+
+.preloader__panel {
+  width: min(86vw, 42rem);
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 2.2vw, 1.65rem);
+  padding-block: 2rem;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.preloader__eyebrow,
+.preloader__status {
+  margin: 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(0.78rem, 1.8vw, 0.98rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.preloader__eyebrow {
+  color: var(--preloader-green);
+  text-shadow: 0 0 18px rgba(110, 255, 0, 0.52);
+}
+
+.preloader__status {
+  font-size: clamp(0.68rem, 1.5vw, 0.82rem);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.preloader__mark-shell {
+  position: relative;
+  width: clamp(11rem, 23vw, 22rem);
+  aspect-ratio: 1620 / 2001;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  filter: drop-shadow(0 0 20px rgba(110, 255, 0, 0.22));
+  transform: translateZ(0);
+  will-change: transform, opacity, filter;
+}
+
+.preloader__mark-shell::before {
+  content: "";
+  position: absolute;
+  inset: -13% -28%;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse at center, rgba(110, 255, 0, 0.22), rgba(110, 255, 0, 0.08) 38%, transparent 70%),
+    linear-gradient(90deg, transparent, rgba(110, 255, 0, 0.08), transparent);
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+.preloader__scan {
+  position: absolute;
+  left: -30%;
+  right: -30%;
+  top: 0;
+  z-index: 2;
+  height: 32%;
+  background: linear-gradient(180deg, transparent, rgba(110, 255, 0, 0.22), rgba(255, 255, 255, 0.14), transparent);
+  filter: blur(14px);
+  opacity: 0.72;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.preloader__logo-mask {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  transform: translateZ(0);
+  will-change: clip-path;
+}
+
+.preloader__logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  filter:
+    saturate(1.08)
+    contrast(1.04)
+    drop-shadow(0 0 18px rgba(110, 255, 0, 0.3));
+  transform: translateZ(0);
+  will-change: filter;
+}
+
+.preloader__progress {
+  position: relative;
+  width: clamp(14rem, 34vw, 32rem);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 24px rgba(110, 255, 0, 0.18);
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.preloader__progress-rail,
+.preloader__progress-fill,
+.preloader__sweep {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.preloader__progress-rail {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+}
+
+.preloader__progress-fill {
+  background: linear-gradient(90deg, rgba(110, 255, 0, 0.35), var(--preloader-green), rgba(255, 255, 255, 0.78));
+  box-shadow: 0 0 22px rgba(110, 255, 0, 0.78);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.preloader__sweep {
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  opacity: 0.58;
+  will-change: transform;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  background: var(--color-main-bg);
+  transition:
+    opacity 0.7s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.app-shell--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 12px, 0);
+}
+
+.app-shell--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+@media (max-width: 480px) {
+  .preloader__panel {
+    width: min(88vw, 24rem);
+    gap: 0.95rem;
+  }
+
+  .preloader__mark-shell {
+    width: clamp(9.5rem, 48vw, 14rem);
+  }
+
+  .preloader__progress {
+    width: min(68vw, 16rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell {
+    transition: opacity 0.2s linear;
+    transform: none;
+  }
+}
