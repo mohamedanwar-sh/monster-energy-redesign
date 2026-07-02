@@ -188,7 +188,7 @@ const MessageSection = () => {
 
           {/* Paragraph */}
           <div className="flex justify-center items-center mt-8 md:mt-20">
-            <div className="max-w-md px-5 md:px-10 flex justify-center items-center overflow-hidden">
+            <div className="max-w-md px-5 md:px-10 flex flex-col justify-center items-center overflow-hidden">
               <p
                 className="text-center text-sm md:text-lg leading-relaxed font-body"
                 style={{ color: "var(--color-monster-gray)" }}
@@ -196,6 +196,9 @@ const MessageSection = () => {
                 Monster Energy delivers a big, bad buzz — born from athletes,
                 artists, and rebels who refuse to slow down. One sip. Unstoppable.
               </p>
+              <a href="#flavors" className="message-next-link">
+                Explore the lineup
+              </a>
             </div>
           </div>
 

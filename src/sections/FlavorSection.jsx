@@ -11,6 +11,9 @@ const FlavorSection = () => {
             <FlavorSlider />
         </div>
       </div>
+      <a href="#choose-energy" className="flavor-next-link">
+        Pick your energy
+      </a>
     </section>
   );
 };

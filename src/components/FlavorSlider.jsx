@@ -22,6 +22,7 @@ const FlavorSlider = () => {
       const flavorBand = section.querySelector(".flavor-text-scroll");
       const secondTitle = section.querySelector(".second-text-split");
       const scrollAmount = Math.max(slider.scrollWidth - window.innerWidth, 0);
+      const horizontalBuffer = Math.min(720, Math.max(420, window.innerWidth * 0.42));
       let horizontalTl;
 
       // Desktop horizontal pin.
@@ -31,7 +32,7 @@ const FlavorSlider = () => {
           scrollTrigger: {
             trigger: section,
             start: "2% top",
-            end: `+=${scrollAmount + 1050}px`,
+            end: `+=${scrollAmount + horizontalBuffer}px`,
             scrub: motion.scrub,
             pin: true,
             anticipatePin: 1,
@@ -39,7 +40,7 @@ const FlavorSlider = () => {
           },
         });
         horizontalTl.to(section, {
-          x: `-${scrollAmount + 1050}px`,
+          x: `-${scrollAmount + horizontalBuffer}px`,
           ease: motion.ease.scrollScrub,
         });
       }

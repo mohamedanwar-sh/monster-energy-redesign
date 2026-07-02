@@ -54,7 +54,7 @@ const FlavorTitle = () => {
     <div ref={titleRef} className="general-title col-center h-full 2xl:gap-32 xl:gap-24 gap-16 bg-black">
       {/* First text - White */}
       <div className="overflow-hidden 2xl:py-0 py-3 first-text-split">
-        <h1 className="text-white">We have 3</h1>
+        <h1 className="text-white">Explore 3</h1>
       </div>
       
       {/* Middle highlighted text - Monster Energy Green with Black text */}
@@ -71,7 +71,7 @@ const FlavorTitle = () => {
       
       {/* Last text - Monster Green for brand consistency */}
       <div className="overflow-hidden 2xl:py-0 py-3 second-text-split">
-        <h1 className="text-monster-green">delicious flavors</h1>
+        <h1 className="text-monster-green">signature flavors</h1>
       </div>
     </div>
   );

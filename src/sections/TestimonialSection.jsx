@@ -95,11 +95,10 @@ const TestimonialSection = () => {
         scrollTrigger: {
           trigger: section,
           start: "10% top",
-          end: "200% top",
+          end: "165% top",
           scrub: motion.scrub,
           pin: true,
           anticipatePin: 1,
-          invalidateOnRefresh: true,
         },
       });
 
@@ -267,11 +266,15 @@ const TestimonialSection = () => {
         data-testid="testimonials-section"
         style={{ backgroundColor: "black" }}
       >
-        <div className="absolute size-full flex flex-col items-center pt-[5vw] pointer-events-none">
+        <div className="testimonial-title-stack flex flex-col items-center pointer-events-none">
           <h1 className="text-white first-title">What's</h1>
           <h1 className="sec-title">Everyone</h1>
           <h1 className="text-white third-title">Talking</h1>
         </div>
+
+        <p className="testimonial-helper">
+          Hover to preview. Click a creator to watch the full review.
+        </p>
 
         <div className="pin-box">
           {cards.map((card, index) => (
@@ -330,8 +333,8 @@ const TestimonialSection = () => {
 
               {/* Play Overlay Indicator */}
               {card.link && (
-                <div className="absolute inset-0 bg-black/0 hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                  <div className="opacity-0 hover:opacity-100 transition-opacity duration-300 transform hover:scale-110">
+                <div className="testimonial-play-overlay absolute inset-0 bg-black/0 transition-all duration-200 flex items-center justify-center">
+                  <div className="testimonial-play-icon transition-opacity duration-200 transform">
                     <svg 
                       className="w-12 h-12 text-white" 
                       fill="currentColor" 

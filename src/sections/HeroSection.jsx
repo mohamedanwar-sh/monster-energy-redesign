@@ -15,6 +15,25 @@ const HeroSection = () => {
 
       const heroVideo = section.querySelector(".hero-video");
       const heroTexture = section.querySelector(".hero-texture");
+      const heroCopy = section.querySelector(".hero-copy");
+      const heroActions = section.querySelector(".hero-actions");
+      const heroScrollCue = section.querySelector(".hero-scroll-cue");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!reduceMotion) {
+        gsap.fromTo(
+          [heroCopy, heroActions, heroScrollCue],
+          { autoAlpha: 0, y: 24 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.08,
+            delay: 0.15,
+            ease: motion.ease.entrance,
+          },
+        );
+      }
 
       const heroTl = gsap.timeline({
         scrollTrigger: {
@@ -96,7 +115,7 @@ const HeroSection = () => {
             loop
             muted
             playsInline
-            preload="none"
+            preload="metadata"
             poster="/videos/posters/zaza-poster.webp"
             className="hero-video absolute inset-0 w-full h-full object-cover"
             aria-label="Monster Energy hero video"
@@ -114,9 +133,30 @@ const HeroSection = () => {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)",
+                "linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 42%, rgba(0,0,0,0.18) 100%), radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.62) 100%)",
             }}
           />
+        </div>
+
+        <div className="hero-content">
+          <div className="hero-copy">
+            <p>Monster Energy Redesign Concept</p>
+            <h1>Unleash a sharper energy experience.</h1>
+            <span>
+              A premium landing page concept for Monster fans, built around bold
+              motion, flavor discovery, product energy, and creator reviews.
+            </span>
+          </div>
+
+          <div className="hero-actions" aria-label="Primary page actions">
+            <a href="#flavors">Explore flavors</a>
+            <a href="#testimonials">Watch reviews</a>
+          </div>
+
+          <a href="#about" className="hero-scroll-cue" aria-label="Scroll to brand story">
+            <span>Scroll the drop</span>
+            <i aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>

@@ -109,7 +109,9 @@ const ChooseEnergySection = () => {
                 className="choose-energy-option"
                 aria-pressed={selectedIndex === index}
                 aria-label={`Select ${flavor.name}`}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => {
+                  if (selectedIndex !== index) setSelectedIndex(index);
+                }}
                 style={{ "--option-accent": flavor.glowColor }}
               >
                 <span className="choose-energy-swatch" aria-hidden="true" />
@@ -117,6 +119,10 @@ const ChooseEnergySection = () => {
               </button>
             ))}
           </div>
+
+          <a href="#energy-profile" className="choose-energy-next">
+            Compare the energy profile
+          </a>
         </div>
       </div>
     </section>

@@ -111,6 +111,92 @@ body::-webkit-scrollbar {
     @apply relative bg-black w-screen h-dvh overflow-hidden;
   }
 
+  .hero-content {
+    @apply absolute inset-x-0 bottom-0 z-20 mx-auto flex w-full max-w-7xl flex-col items-start gap-6 px-5 pb-10 md:px-10 md:pb-14 xl:px-14;
+  }
+
+  .hero-copy {
+    @apply max-w-4xl;
+
+    p {
+      @apply mb-4 text-sm font-black uppercase tracking-[0.22em];
+      color: var(--color-monster-green);
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    h1 {
+      @apply max-w-5xl text-6xl font-black uppercase leading-[0.88] text-white md:text-8xl xl:text-[8.5rem];
+      font-family: "Barlow Condensed", sans-serif;
+      text-shadow:
+        0 0 3rem rgba(124, 183, 1, 0.22),
+        0 0 0.45rem rgba(255, 255, 255, 0.08);
+    }
+
+    span {
+      @apply mt-5 block max-w-2xl text-base leading-[1.5] text-white/72 md:text-xl;
+      font-family: "Barlow", sans-serif;
+    }
+  }
+
+  .hero-actions {
+    @apply flex flex-wrap gap-3;
+
+    a {
+      @apply inline-flex min-h-12 items-center justify-center border px-5 text-sm font-black uppercase tracking-[0.14em] transition-colors duration-200;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    a:first-child {
+      color: var(--color-black);
+      border-color: var(--color-monster-green);
+      background: var(--color-monster-green);
+    }
+
+    a:last-child {
+      @apply text-white;
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(0, 0, 0, 0.28);
+    }
+
+    a:hover,
+    a:focus-visible {
+      border-color: var(--color-monster-green);
+      background: rgba(124, 183, 1, 0.16);
+      color: var(--color-white);
+    }
+  }
+
+  .hero-scroll-cue {
+    @apply mt-2 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-white/58 transition-colors duration-200;
+    font-family: "Barlow Condensed", sans-serif;
+
+    i {
+      @apply block h-8 w-px;
+      background: linear-gradient(180deg, var(--color-monster-green), transparent);
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-monster-green);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-content {
+      padding-bottom: 2rem;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3.35rem, 16vw, 5rem);
+    }
+
+    .hero-actions a {
+      min-height: 2.75rem;
+      padding-inline: 1rem;
+      font-size: 0.78rem;
+    }
+  }
+
   /* ── Message Section ──────────────────────────────────────── */
   .message-content {
     @apply min-h-dvh overflow-hidden flex justify-center items-center relative z-20;
@@ -131,6 +217,17 @@ body::-webkit-scrollbar {
       font-family: "Barlow", sans-serif;
     }
 
+    .message-next-link {
+      @apply mt-6 inline-flex min-h-11 items-center justify-center border border-white/18 px-4 text-xs font-black uppercase tracking-[0.18em] text-white/68 transition-colors duration-200;
+      font-family: "Barlow Condensed", sans-serif;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--color-monster-green);
+        color: var(--color-monster-green);
+      }
+    }
+
     h1, h2 { @apply leading-none; }
 
     .msg-text-scroll {
@@ -141,7 +238,7 @@ body::-webkit-scrollbar {
 
   /* ── Flavor Section ───────────────────────────────────────── */
   .flavor-section {
-    @apply min-h-dvh;
+    @apply relative min-h-dvh;
     background-color: var(--color-black);
 
     .flavor-text-scroll {
@@ -171,6 +268,17 @@ body::-webkit-scrollbar {
           font-family: "Barlow Condensed", sans-serif;
           color: var(--color-monster-green);
         }
+      }
+    }
+
+    .flavor-next-link {
+      @apply absolute bottom-6 right-5 z-40 inline-flex min-h-11 items-center border border-white/18 bg-black/45 px-4 text-xs font-black uppercase tracking-[0.18em] text-white/70 transition-colors duration-200 md:right-10 xl:bottom-8;
+      font-family: "Barlow Condensed", sans-serif;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--color-monster-green);
+        color: var(--color-monster-green);
       }
     }
   }
@@ -307,6 +415,17 @@ body::-webkit-scrollbar {
       background: var(--option-accent);
       box-shadow: 0 0 18px var(--option-accent);
     }
+
+    .choose-energy-next {
+      @apply inline-flex min-h-11 w-fit items-center border border-white/18 px-4 text-xs font-black uppercase tracking-[0.18em] text-white/68 transition-colors duration-200;
+      font-family: "Barlow Condensed", sans-serif;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--energy-glow);
+        color: var(--energy-glow);
+      }
+    }
   }
 
   .energy-profile-section {
@@ -408,7 +527,7 @@ body::-webkit-scrollbar {
 
   /* ── Benefit Section ──────────────────────────────────────── */
   .benefit-section {
-    @apply relative min-h-dvh overflow-hidden bg-black px-5 py-16 md:px-10 md:py-20 xl:px-14;
+    @apply relative overflow-hidden bg-black px-5 py-20 md:px-10 md:py-24 xl:px-14;
     background-color: var(--color-black);
     isolation: isolate;
 
@@ -418,10 +537,9 @@ body::-webkit-scrollbar {
       inset: 0;
       z-index: -3;
       background:
-        linear-gradient(180deg, rgba(124, 183, 1, 0.12) 0%, transparent 18%),
-        radial-gradient(circle at 22% 48%, rgba(124, 183, 1, 0.2), transparent 34%),
-        radial-gradient(circle at 78% 58%, rgba(136, 190, 0, 0.12), transparent 32%),
-        linear-gradient(180deg, #000 0%, #040604 48%, #000 100%);
+        radial-gradient(circle at 18% 18%, rgba(124, 183, 1, 0.18), transparent 28rem),
+        radial-gradient(circle at 82% 56%, rgba(255, 255, 255, 0.08), transparent 26rem),
+        linear-gradient(180deg, #000 0%, #041004 50%, #000 100%);
     }
 
     &::after {
@@ -437,60 +555,71 @@ body::-webkit-scrollbar {
       opacity: 0.65;
     }
 
-    .benefit-story-glow {
-      @apply absolute left-[42%] top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full md:h-[42rem] md:w-[42rem] xl:left-[38%];
+    .benefit-atmosphere {
+      content: "";
+      @apply pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full md:h-[44rem] md:w-[44rem];
       z-index: -1;
-      background:
-        radial-gradient(circle, rgba(124, 183, 1, 0.38), rgba(124, 183, 1, 0.11) 42%, transparent 70%);
-      filter: blur(42px);
-      opacity: 0.64;
-      will-change: transform, opacity;
+      background: radial-gradient(circle, rgba(124, 183, 1, 0.2), rgba(124, 183, 1, 0.06) 42%, transparent 70%);
+      filter: blur(22px);
     }
 
-    .benefit-story-claw {
-      @apply pointer-events-none absolute right-[-5rem] top-1/2 hidden w-[34vw] max-w-[34rem] -translate-y-1/2 opacity-[0.1] xl:block;
-      filter: drop-shadow(0 0 2.5rem rgba(124, 183, 1, 0.52));
-      transform: translateZ(0);
-      will-change: transform;
+    .benefit-inner {
+      @apply relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.92fr_0.82fr] xl:grid-cols-[0.9fr_0.78fr];
     }
 
-    .benefit-story-inner {
-      @apply relative mx-auto grid min-h-[calc(100dvh-8rem)] w-full max-w-7xl items-center gap-8 md:min-h-[calc(100dvh-10rem)] xl:grid-cols-[0.88fr_1fr];
+    .benefit-copy {
+      @apply max-w-4xl lg:col-start-1 lg:row-start-1;
     }
 
-    .benefit-meta {
-      @apply absolute left-0 right-0 top-0 z-20 flex justify-between gap-4 text-xs font-black uppercase tracking-[0.22em] text-white/45;
+    .benefit-kicker {
+      @apply mb-4 text-sm font-black uppercase tracking-[0.24em] md:mb-5;
+      color: var(--color-monster-green);
+      font-family: "Barlow Condensed", sans-serif;
+    }
 
-      span:first-child {
+    .benefit-copy h2 {
+      @apply max-w-5xl text-6xl font-black uppercase leading-[0.88] text-white md:text-8xl xl:text-[8rem];
+      font-family: "Barlow Condensed", sans-serif;
+      text-shadow:
+        0 0 3rem rgba(124, 183, 1, 0.24),
+        0 0 0.4rem rgba(255, 255, 255, 0.08);
+    }
+
+    .benefit-copy > p:not(.benefit-kicker) {
+      @apply mt-6 max-w-2xl text-base leading-[1.55] text-white/68 md:text-xl;
+      font-family: "Barlow", sans-serif;
+    }
+
+    .benefit-next-link {
+      @apply mt-6 inline-flex min-h-11 items-center border border-white/18 px-4 text-xs font-black uppercase tracking-[0.18em] text-white/68 transition-colors duration-200;
+      font-family: "Barlow Condensed", sans-serif;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--color-monster-green);
         color: var(--color-monster-green);
       }
     }
 
-    .benefit-product-stage {
-      @apply relative mx-auto grid aspect-square w-full max-w-[21rem] place-items-center md:max-w-[29rem] xl:max-w-[34rem];
-      overflow: hidden;
-      transform: translateZ(0);
-      will-change: transform, opacity;
+    .benefit-showcase {
+      @apply relative mx-auto grid aspect-square w-full max-w-[19rem] place-items-center md:max-w-[27rem] lg:col-start-2 lg:row-span-2 lg:max-w-[31rem];
+      transform: translate3d(0, 0, 0);
     }
 
-    .benefit-product-stage::before {
+    .benefit-showcase::before {
       content: "";
-      position: absolute;
-      inset: 17% 7% 6%;
-      border-radius: 999px;
-      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 66%);
-      filter: blur(18px);
-      transform: translateY(28%);
+      @apply absolute bottom-[6%] left-1/2 h-[22%] w-[58%] -translate-x-1/2 rounded-full;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.68), transparent 68%);
+      filter: blur(12px);
     }
 
     .benefit-orbit {
       @apply absolute rounded-full border;
-      border-color: rgba(124, 183, 1, 0.34);
+      border-color: rgba(124, 183, 1, 0.3);
       box-shadow:
-        inset 0 0 3rem rgba(124, 183, 1, 0.08),
-        0 0 3rem rgba(124, 183, 1, 0.16);
-      transform: translateZ(0);
-      will-change: transform, opacity;
+        inset 0 0 2.5rem rgba(124, 183, 1, 0.08),
+        0 0 2.8rem rgba(124, 183, 1, 0.14);
+      transform: translate3d(0, 0, 0);
     }
 
     .benefit-orbit--outer {
@@ -499,146 +628,99 @@ body::-webkit-scrollbar {
 
     .benefit-orbit--inner {
       @apply h-[58%] w-[58%];
-      border-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .benefit-energy-line {
+      @apply absolute left-1/2 h-px w-[78%] -translate-x-1/2;
+      background: linear-gradient(90deg, transparent, rgba(124, 183, 1, 0.82), transparent);
+      box-shadow: 0 0 18px rgba(124, 183, 1, 0.54);
+    }
+
+    .benefit-energy-line--top {
+      top: 25%;
+    }
+
+    .benefit-energy-line--bottom {
+      bottom: 22%;
     }
 
     .benefit-can {
-      @apply absolute z-10 h-[86%] max-h-full w-auto object-contain;
+      @apply relative z-20 h-[84%] max-h-full w-auto object-contain;
       filter:
         drop-shadow(0 2rem 2.4rem rgba(0, 0, 0, 0.62))
-        drop-shadow(0 0 2.6rem rgba(124, 183, 1, 0.34));
-      transform: translateZ(0);
-      will-change: transform;
+        drop-shadow(0 0 2.2rem rgba(124, 183, 1, 0.32));
+      transform: translate3d(0, 0, 0);
     }
 
-    .benefit-stage-claw {
-      @apply pointer-events-none absolute right-[9%] top-[17%] z-20 w-[24%] opacity-80;
-      filter: drop-shadow(0 0 1.6rem rgba(124, 183, 1, 0.58));
-      transform: rotate(10deg);
+    .benefit-claw {
+      @apply pointer-events-none absolute right-[12%] top-[16%] z-30 w-[22%] rotate-12 opacity-80;
+      filter: drop-shadow(0 0 1.2rem rgba(124, 183, 1, 0.56));
     }
 
-    .benefit-copy-panel {
-      @apply relative min-h-[26rem] overflow-hidden border-y border-white/12 py-10 md:min-h-[31rem] md:py-14 xl:min-h-[34rem] xl:py-16;
+    .benefit-grid {
+      @apply grid gap-3 sm:grid-cols-2 lg:col-start-1 lg:row-start-2 lg:gap-4;
     }
 
-    .benefit-copy-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+    .benefit-card {
+      @apply relative overflow-hidden border border-white/12 p-5 md:p-6;
       background:
-        linear-gradient(90deg, rgba(124, 183, 1, 0.12), transparent 24%, transparent),
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 5rem;
-      mask-image: linear-gradient(90deg, black, transparent 92%);
-      opacity: 0.48;
-      pointer-events: none;
+        linear-gradient(135deg, rgba(124, 183, 1, 0.12), transparent 36%),
+        rgba(0, 0, 0, 0.58);
+      min-height: 13rem;
     }
 
-    .benefit-progress {
-      @apply absolute bottom-0 left-0 right-0 h-px overflow-hidden bg-white/12;
+    .benefit-card::after {
+      content: "";
+      @apply absolute inset-x-0 bottom-0 h-px;
+      background: linear-gradient(90deg, var(--color-monster-green), transparent);
+      opacity: 0.86;
     }
 
-    .benefit-progress-fill {
-      @apply block h-full w-full;
-      background: linear-gradient(90deg, var(--color-monster-green), rgba(255, 255, 255, 0.82));
-      box-shadow: 0 0 24px rgba(124, 183, 1, 0.64);
-      transform: scaleX(0.25);
-      transform-origin: left center;
-      will-change: transform;
+    .benefit-card-top {
+      @apply mb-8 flex items-center justify-between gap-4;
     }
 
-    .benefit-chapters {
-      @apply relative z-10 grid min-h-[20rem] items-center md:min-h-[24rem] xl:min-h-[26rem];
-    }
-
-    .benefit-chapter {
-      @apply absolute inset-0 flex flex-col justify-center;
-      transform: translateZ(0);
-      will-change: transform, opacity;
-
-      p {
-        @apply mb-4 text-sm font-black uppercase tracking-[0.24em] md:mb-5;
-        color: var(--color-monster-green);
-        font-family: "Barlow Condensed", sans-serif;
-      }
-
-      h2 {
-        @apply max-w-4xl text-6xl font-black uppercase leading-[0.88] text-white md:text-8xl xl:text-[8.8rem];
-        font-family: "Barlow Condensed", sans-serif;
-        text-shadow:
-          0 0 3rem rgba(124, 183, 1, 0.26),
-          0 0 0.4rem rgba(255, 255, 255, 0.08);
-      }
-
-      span {
-        @apply mt-6 block max-w-2xl text-base leading-[1.45] text-white/68 md:text-2xl;
-        font-family: "Barlow", sans-serif;
-      }
-    }
-
-    .benefit-steps {
-      @apply absolute bottom-8 left-0 z-10 flex gap-3 md:bottom-10;
-    }
-
-    .benefit-step {
-      @apply grid size-9 place-items-center border border-white/12 text-xs font-black md:size-10 md:text-sm;
-      background: rgba(0, 0, 0, 0.44);
+    .benefit-card-top span {
+      @apply grid size-10 place-items-center border border-white/12 text-sm font-black;
       color: var(--color-monster-green);
       font-family: "Barlow Condensed", sans-serif;
-      box-shadow: inset 0 0 1.2rem rgba(124, 183, 1, 0.06);
-      transform: translateZ(0);
-      will-change: transform, opacity;
+      background: rgba(0, 0, 0, 0.44);
+    }
+
+    .benefit-card-top strong {
+      @apply text-right text-xs font-black uppercase tracking-[0.18em] text-white/45;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    .benefit-card h3 {
+      @apply text-3xl font-black uppercase leading-none text-white md:text-4xl;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    .benefit-card p {
+      @apply mt-4 text-sm leading-[1.45] text-white/64 md:text-base;
+      font-family: "Barlow", sans-serif;
     }
 
     @media (max-width: 767px) {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
 
-      .benefit-story-inner {
-        align-content: center;
-        grid-template-rows: auto auto;
-        min-height: calc(100dvh - 8rem);
-        gap: 1.25rem;
+      .benefit-inner {
+        gap: 2rem;
       }
 
-      .benefit-meta {
-        top: -0.25rem;
+      .benefit-copy h2 {
+        font-size: clamp(3.25rem, 16vw, 4.7rem);
       }
 
-      .benefit-product-stage {
-        margin-top: 1.75rem;
-        width: min(72vw, 17rem);
-        height: min(31vh, 15rem);
-        max-width: none;
-        aspect-ratio: auto;
+      .benefit-showcase {
+        max-width: min(76vw, 18rem);
       }
 
-      .benefit-can {
-        height: 92%;
-        max-height: 100%;
-      }
-
-      .benefit-stage-claw {
-        width: 22%;
-      }
-
-      .benefit-copy-panel {
-        min-height: min(42vh, 20rem);
-        padding-top: 1.7rem;
-        padding-bottom: 3.8rem;
-      }
-
-      .benefit-chapter h2 {
-        font-size: clamp(2.85rem, 14.5vw, 4.15rem);
-      }
-
-      .benefit-chapter span {
-        margin-top: 1rem;
-        font-size: 0.98rem;
-      }
-
-      .benefit-steps {
-        bottom: 1rem;
+      .benefit-card {
+        min-height: auto;
       }
     }
   }
@@ -668,6 +750,67 @@ body::-webkit-scrollbar {
       @apply uppercase text-[20.5vw] leading-[105%] tracking-[-.4vw] ml-[2vw] font-bold;
       font-family: "Bebas Neue", sans-serif;
       color: var(--color-monster-green);
+    }
+
+    .testimonial-title-stack {
+      @apply absolute size-full pt-[5vw];
+    }
+
+    .testimonial-helper {
+      @apply pointer-events-none absolute left-5 right-5 top-6 z-20 mx-auto max-w-md border border-white/12 bg-black/45 px-4 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-white/70 md:left-auto md:right-10 md:top-auto md:bottom-10 md:mx-0 md:text-right;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    .testimonial-play-overlay {
+      @apply bg-black/0;
+    }
+
+    .testimonial-play-icon {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+
+    .vd-card:hover .testimonial-play-overlay,
+    .vd-card:focus-visible .testimonial-play-overlay {
+      background: rgba(0, 0, 0, 0.38);
+    }
+
+    .vd-card:hover .testimonial-play-icon,
+    .vd-card:focus-visible .testimonial-play-icon {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+
+    @media (max-width: 767px) {
+      padding-top: 4.5rem;
+
+      .testimonial-title-stack {
+        position: relative;
+        inset: auto;
+        z-index: 1;
+        width: 100%;
+        height: auto;
+        padding-top: 0;
+      }
+
+      .testimonial-title-stack h1 {
+        margin-left: 0;
+        text-align: center;
+        font-size: clamp(4.8rem, 24vw, 6.8rem);
+        line-height: 0.88;
+        letter-spacing: 0;
+      }
+
+      .testimonial-helper {
+        position: relative;
+        inset: auto;
+        width: calc(100% - 2rem);
+        margin: 1.75rem auto 2rem;
+      }
+
+      .pin-box {
+        padding-top: 1.25rem;
+      }
     }
   }
 

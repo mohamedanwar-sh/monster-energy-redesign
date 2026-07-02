@@ -35,6 +35,31 @@ const Footer = () => {
       className="bg-black text-white pt-16 pb-6 px-6 md:px-12 lg:px-20"
       data-testid="site-footer"
     >
+      <div className="max-w-[1400px] mx-auto mb-14 border-y border-[#1e1e1e] py-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-monster-green text-sm font-black uppercase tracking-[0.22em] mb-2">
+            Keep the energy moving
+          </p>
+          <h2 className="text-4xl md:text-5xl font-black uppercase leading-none">
+            Find your next Monster mode.
+          </h2>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="#choose-energy"
+            className="min-h-12 inline-flex items-center justify-center border border-monster-green bg-monster-green px-5 text-sm font-black uppercase tracking-[0.14em] text-black transition-colors duration-200 hover:bg-transparent hover:text-white"
+          >
+            Choose energy
+          </a>
+          <a
+            href="#top"
+            className="min-h-12 inline-flex items-center justify-center border border-white/25 px-5 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors duration-200 hover:border-monster-green hover:text-monster-green"
+          >
+            Back to top
+          </a>
+        </div>
+      </div>
+
       {/* Main Footer Content */}
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
         
@@ -113,7 +138,17 @@ const Footer = () => {
       <div className="max-w-350 mx-auto mt-16 pt-6 border-t border-[#1e1e1e] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-[#777] text-xs">
 
         <span>All Rights Reserved</span>
-        <span>Redesigned by <span className="text-monster-green font-semibold">Mohamed Anwar</span></span>
+        <span>
+          Redesigned by{" "}
+          <a
+            href="https://www.linkedin.com/in/mohamedanwar-sh/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-monster-green font-semibold hover:text-white transition-colors"
+          >
+            Mohamed Anwar
+          </a>
+        </span>
         <a href="https://www.monsterenergy.com/en-us/privacy-policy/" className="hover:text-monster-green transition-colors">Privacy Policy</a>
         <a href="https://www.monsterenergy.com/en-us/cookie-policy/" className="hover:text-monster-green transition-colors">Cookies Policy</a>
         <a href="https://www.monsterenergy.com/en-us/terms-of-use/" className="hover:text-monster-green transition-colors">Terms of Use</a>
